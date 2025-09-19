@@ -10,7 +10,13 @@ interface InstanceCardProps {
   az: string;
 }
 
-const InstanceCard = ({ id, status, cpuUsage, httpEndpoint, az }: InstanceCardProps) => {
+const InstanceCard = ({
+  id,
+  status,
+  cpuUsage,
+  httpEndpoint,
+  az,
+}: InstanceCardProps) => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "running":
@@ -41,7 +47,7 @@ const InstanceCard = ({ id, status, cpuUsage, httpEndpoint, az }: InstanceCardPr
           {status}
         </Badge>
       </div>
-      
+
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -52,24 +58,28 @@ const InstanceCard = ({ id, status, cpuUsage, httpEndpoint, az }: InstanceCardPr
             {cpuUsage}%
           </span>
         </div>
-        
+
         <div className="w-full bg-muted rounded-full h-2">
           <div
             className={`h-2 rounded-full transition-all duration-500 ${
-              cpuUsage >= 70 ? "bg-destructive" : 
-              cpuUsage >= 50 ? "bg-warning" : "bg-success"
+              cpuUsage >= 70
+                ? "bg-destructive"
+                : cpuUsage >= 50
+                ? "bg-warning"
+                : "bg-success"
             }`}
             style={{ width: `${cpuUsage}%` }}
           />
         </div>
-        
+
         <div className="flex items-center gap-2 pt-2">
           <Globe className="h-4 w-4 text-muted-foreground" />
           <span className="text-xs text-muted-foreground">{httpEndpoint}</span>
         </div>
-        
+
         <div className="text-xs text-muted-foreground">
-          Availability Zone: <span className="text-accent font-medium">{az}</span>
+          Availability Zone:{" "}
+          <span className="text-accent font-medium">{az}</span>
         </div>
       </div>
     </Card>
